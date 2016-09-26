@@ -46,11 +46,10 @@ public class AuthPresenterTest {
     @Test
     public void testNewAuth() throws Exception {
         //given
-        target.init(view);
         when(store.has(anyString())).thenReturn(false);
 
         //when
-        target.load();
+        target.init(view);
 
         //then
         verify(interactor).authToken(any(Interactor.Listener.class));
@@ -59,16 +58,15 @@ public class AuthPresenterTest {
     @Test
     public void testOldAuth() throws Exception {
         //given
-        target.init(view);
         when(store.has(anyString())).thenReturn(true);
         when(store.getString(anyString())).thenReturn(KEY);
 
         //when
-        target.load();
+        target.init(view);
 
         //then
         verifyZeroInteractions(interactor);
-        fetcher.switchToBearerAuth(KEY);
+        verify(fetcher).switchToBearerAuth(KEY);
         verify(view).onAuthReady();
     }
 
@@ -82,8 +80,8 @@ public class AuthPresenterTest {
         target.onSuccess(token);
 
         //then
-        fetcher.switchToBearerAuth(KEY);
-        store.put(anyString(), eq(KEY));
+        verify(fetcher).switchToBearerAuth(KEY);
+        verify(store).put(anyString(), eq(KEY));
         verify(view).onAuthReady();
     }
 }

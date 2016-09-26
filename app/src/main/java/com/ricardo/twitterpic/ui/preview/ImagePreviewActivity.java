@@ -1,4 +1,4 @@
-package com.ricardo.twitterpic.ui;
+package com.ricardo.twitterpic.ui.preview;
 
 import android.os.Build;
 import android.os.Bundle;

@@ -2,8 +2,6 @@ package com.ricardo.twitterpic.core.models;
 
 import java.util.List;
 
-
-
 public class SearchResponse {
     private final List<Tweet> statuses;
 

@@ -31,6 +31,7 @@ import com.ricardo.twitterpic.ui.auth.AuthPresenter;
 import com.ricardo.twitterpic.ui.auth.AuthReadyUi;
 import com.ricardo.twitterpic.ui.common.GridAutofitLayoutManager;
 import com.ricardo.twitterpic.ui.common.LoadingFeature;
+import com.ricardo.twitterpic.ui.preview.ImagePreviewActivity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -82,17 +83,14 @@ public class SearchActivity extends AppCompatActivity implements AuthReadyUi, Im
         searchListAdapter = new SearchListAdapter(imagesSearchPresenter, this);
         rvImages.setAdapter(new AlphaInAnimationAdapter(searchListAdapter));
 
-        // init presenters
-        authPresenter.init(this);
-        imagesSearchPresenter.init(this);
-
         // init layout manager for grid
         layoutManager = new GridAutofitLayoutManager(this, imagesSearchPresenter.getItemMaxWidth());
         layoutManager.setAutoMeasureEnabled(true);
         rvImages.setLayoutManager(layoutManager);
 
-        // load
-        authPresenter.load();
+        // init presenters
+        imagesSearchPresenter.init(this);
+        authPresenter.init(this);
         imagesSearchPresenter.restore(savedInstanceState != null);
     }
 

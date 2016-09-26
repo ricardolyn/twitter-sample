@@ -32,9 +32,11 @@ public class AuthPresenter implements Presenter<AuthReadyUi>, Interactor.Listene
     @Override
     public void init(AuthReadyUi view) {
         this.view = view;
+
+        load();
     }
 
-    public void load() {
+    private void load() {
         if (store.has(BEARER_AUTH)) {
             fetcher.switchToBearerAuth(store.getString(BEARER_AUTH));
             view.onAuthReady();
@@ -47,6 +49,7 @@ public class AuthPresenter implements Presenter<AuthReadyUi>, Interactor.Listene
     @Override
     public void onSuccess(Token token) {
         store.put(BEARER_AUTH, token.getAccessToken());
+        fetcher.switchToBearerAuth(token.getAccessToken());
         view.setLoading(false);
         view.onAuthReady();
     }

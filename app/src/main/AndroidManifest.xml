@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.ImagePreviewActivity"
+            android:name=".ui.preview.ImagePreviewActivity"
             android:theme="@style/PreviewTheme">
         </activity>
     </application>
